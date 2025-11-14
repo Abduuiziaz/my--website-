@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع القريشي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>مرحبا بكم في موقع القريشي</h1>
+    <p>صلي على النبي ﷺ</p>
+    
+    <h2>اكتب لنا اقتراح عن تعديلات الموقع</h2>
+    
+    <form id="feedbackForm" action="https://formspree.io/f/manaqlpz" method="POST">
+        <textarea name="message" placeholder="اكتب اقتراحاتك هنا..." rows="6" required></textarea>
+        <br>
+        <button type="submit">إرسال</button>
+    </form>
+    
+    <p id="thankYou">شكرا لك يالذيب</p>
+    
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('thankYou').style.display = 'block';
+                    this.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
